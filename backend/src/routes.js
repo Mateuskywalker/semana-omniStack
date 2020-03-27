@@ -1,37 +1,20 @@
 const express = require('express');
 const routes = express.Router();
 
-routes.get('/users/:name', (req, res) => {
-    // get the query params
-    if(req.query) {
-        const params = req.query;
-        console.log(params);
-    }
+const OngController = require('./controllers/OngController');
+const IncidentController = require('./controllers/IncidentController');
+const ProfileController = require('./controllers/ProfileController');
+const SessionController = require('./controllers/SessionController');
 
-    //get the route params
-    if(req.params) {
-        const routeParams = req.params;
-        console.log(routeParams);
-    }
+routes.post('/sessions', SessionController.create);
 
+routes.get('/ongs', OngController.index);
+routes.post('/ongs', OngController.create);
 
-    res.json({
-        message: 'Hello, World!'
-    })
-});
+routes.get('/profile', ProfileController.index);
 
-routes.get('/users/:id', (req, res) => {
-    res.json({
-        message: 'Hello, World!'
-    })
-});
-
-routes.post('/users', (req, res) => {
-    const params = req.body;
-    console.log('Parâmetros recebidos', params);
-    res.json({
-        message: 'ok'
-    });
-});
+routes.post('/incidents', IncidentController.create);
+routes.delete('/incidents/:id', IncidentController.delete);
+routes.get('/incidents', IncidentController.index);
 
 module.exports = routes;
