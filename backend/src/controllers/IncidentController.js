@@ -5,6 +5,7 @@ module.exports = {
         const { page = 1 } = req.query;
 
         // retornando a quantidade de incidentes cadastrados
+        // nessa forma [count] pegamos o primeiro resultado do array retornado
         const [count] = await connection('incidents').count();
 
         res.header('X-Total-Count', count['count(*)']);
